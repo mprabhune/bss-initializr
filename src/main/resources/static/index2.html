@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Custom Spring Boot Initializr</title>
+</head>
+<body>
+<h1>Custom Spring Boot Initializer</h1>
+<form action="/generate" method="post">
+    <label for="language">Language:</label>
+    <select id="language" name="language">
+        <option value="java">Java</option>
+        <option value="kotlin">Kotlin</option>
+        <option value="groovy">Groovy</option>
+    </select><br><br>
+
+    <label for="buildTool">Build Tool:</label>
+    <select id="buildTool" name="buildTool">
+        <option value="gradle">Gradle</option>
+        <option value="maven">Maven</option>
+    </select><br><br>
+
+    <label for="javaVersion">Java Version:</label>
+    <select id="javaVersion" name="javaVersion">
+        <option value="8">8</option>
+        <option value="11">11</option>
+        <option value="17">17</option>
+    </select><br><br>
+
+    <label for="groupId">Group ID:</label>
+    <input type="text" id="groupId" name="groupId" required><br><br>
+
+    <label for="artifactId">Artifact ID:</label>
+    <input type="text" id="artifactId" name="artifactId" required><br><br>
+
+    <label for="dependencies">Dependencies (comma-separated):</label>
+    <input type="text" id="dependencies" name="dependencies"><br><br>
+
+    <button type="submit">Generate Project</button>
+</form>
+</body>
+</html>

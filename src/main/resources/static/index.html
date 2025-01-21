@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Custom Spring Boot Initializer</title>
+    <script>
+        async function generateProject(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const groupId = document.getElementById("groupId").value;
+            const artifactId = document.getElementById("artifactId").value;
+            const dependencies = document.getElementById("dependencies").value.split(",");
+
+            const payload = {
+                groupId: groupId,
+                artifactId: artifactId,
+                dependencies: dependencies
+            };
+
+            const response = await fetch("/generate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                const blob = await response.blob();
+                const link = document.createElement("a");
+                link.href = window.URL.createObjectURL(blob);
+                link.download = "custom-project.zip";
+                link.click();
+            } else {
+                alert("Error generating project: " + response.statusText);
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>Custom Spring Boot Initializer</h1>
+<form onsubmit="generateProject(event)">
+    <label for="groupId">Group ID:</label>
+    <input type="text" id="groupId" name="groupId" required><br><br>
+
+    <label for="artifactId">Artifact ID:</label>
+    <input type="text" id="artifactId" name="artifactId" required><br><br>
+
+    <label for="dependencies">Dependencies (optional, comma-separated):</label>
+    <input type="text" id="dependencies" name="dependencies"><br><br>
+
+    <button type="submit">Generate Project</button>
+</form>
+</body>
+</html>
